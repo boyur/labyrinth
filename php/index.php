@@ -46,7 +46,7 @@ $map[$y][$x] = "&uArr;";
 $direction = "up";
 $counter = 0;
 $time = microtime();
-
+//test
 echo "<b>Лабиринт - Артем Боюр</b><br>";
 
 displayMap($map);

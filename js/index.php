@@ -58,7 +58,7 @@ function displayMap($map){
             width: 20px;
             height: 10px;
             text-align: center;
-            transition: 1s;
+            transition: 0.3s;
         }
     </style>
 </head>
@@ -67,7 +67,7 @@ function displayMap($map){
     <div class="map">
         <?php displayMap($map); ?>
     </div>
-    <button id="btn" class="btn" value="Шаг">Шаг</button>
+    <button id="btn" class="btn">Стат</button>
 
 </body>
 </html>

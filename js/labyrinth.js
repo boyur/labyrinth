@@ -35,17 +35,24 @@ console.log(map_y);
 console.log(map);
 console.log(map_bin);
 
-elem.addEventListener('click', function () {
-    /////////////////////////////////////////////
-    console.log("Зашли в фукцнию поиска");
+/////////////////////////////////////////////
+var speed = 100; // Скорость
+map_bin[y][x] = "&uArr;";
 
-    var speed = 10;
-    map_bin[y][x] = "&uArr;";
+elem.addEventListener('click', animation);
 
-    //while (map_bin[0][4] !== "&uArr;") {
-    //counter++;
-    //echo "Шаг $counter";
-    console.log(map_bin[y][x]);
+function animation() {
+    var id = setInterval(frame, speed);
+    function frame() {
+    if (map_bin[0][4] == "&uArr;") { // Когда дойдем до выхода
+      clearInterval(id); // Остоновка
+    } else {
+      search(); // Вполняем функцию
+    }
+  }
+}
+
+function search() {
 
     //////////////////////////
     switch (direction) {
@@ -60,20 +67,17 @@ elem.addEventListener('click', function () {
 
             if (!map_bin[y][x + 1] && !map_bin[y - 1][x + 1] && map_bin[y - 1][x]) {
 
-                // console.log(map_bin[y][x]);
 
                 map_bin[y][x] = 1;
 
                 y--;
                 map_bin[y][x] = "&uArr;";
 
-                setTimeout(function () {
-                    map[y][x].style.backgroundColor = 'yellow';
-                    map[y][x].innerHTML = "&uArr;";
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&uArr;";
 
-                    map[y + 1][x].style.backgroundColor = 'white';
-                    map[y + 1][x].innerHTML = " ";
-                }, speed);
+                map[y + 1][x].style.backgroundColor = 'white';
+                map[y + 1][x].innerHTML = " ";
 
             } else if (map_bin[y - 1][x + 1] && !map_bin[y][x + 1]) {
 
@@ -82,50 +86,47 @@ elem.addEventListener('click', function () {
                 y--;
                 map_bin[y][x] = "&rArr;";
 
-                //$counter++;
-                //echo "Шаг $counter";
                 map_bin[y][x] = 1;
                 x++;
                 map_bin[y][x] = "&rArr;";
 
-                setTimeout(function () {
-                    map[y][x].style.backgroundColor = 'yellow';
-                    map[y][x].innerHTML = "&rArr;";
+                
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&rArr;";
 
-                    map[y + 1][x - 1].style.backgroundColor = 'white';
-                    map[y + 1][x - 1].innerHTML = " ";
-                }, speed);
+                map[y + 1][x - 1].style.backgroundColor = 'white';
+                map[y + 1][x - 1].innerHTML = " ";
+                
 
             } else if (map_bin[y][x + 1]) {
 
                 direction = "right";
                 map_bin[y][x] = "&rArr;";
 
-                setTimeout(function () {
-                    map[y][x].style.backgroundColor = 'yellow';
-                    map[y][x].innerHTML = "&rArr;";
-                }, speed);
+                
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&rArr;";
+                
 
             } else if (map_bin[y][x - 1]) {
 
                 direction = "left";
                 map_bin[y][x] = "&lArr;";
 
-                setTimeout(function () {
-                    map[y][x].style.backgroundColor = 'yellow';
-                    map[y][x].innerHTML = "&lArr;";
-                }, speed);
+                
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&lArr;";
+                
 
             } else {
 
                 direction = "down";
                 map_bin[y][x] = "&dArr;";
 
-                setTimeout(function () {
-                    map[y][x].style.backgroundColor = 'yellow';
-                    map[y][x].innerHTML = "&dArr;";
-                }, speed);
-
+                
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&dArr;";
+                
             }
             break;
 
@@ -141,13 +142,13 @@ elem.addEventListener('click', function () {
                 x++;
                 map_bin[y][x] = "&rArr;";
 
-                setTimeout(function () {
-                    map[y][x].style.backgroundColor = 'yellow';
-                    map[y][x].innerHTML = "&rArr;";
+                
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&rArr;";
 
-                    map[y][x - 1].style.backgroundColor = 'white';
-                    map[y][x - 1].innerHTML = " ";
-                }, speed);
+                map[y][x - 1].style.backgroundColor = 'white';
+                map[y][x - 1].innerHTML = " ";
+               
 
             }
             else if (map_bin[y + 1][x + 1] && !map_bin[y + 1][x] && map_bin[y][x + 1]) {
@@ -161,13 +162,13 @@ elem.addEventListener('click', function () {
                 y++;
                 map_bin[y][x] = "&dArr;";
 
-                setTimeout(function () {
-                    map[y][x].style.backgroundColor = 'yellow';
-                    map[y][x].innerHTML = "&dArr;";
+                
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&dArr;";
 
-                    map[y - 1][x - 1].style.backgroundColor = 'white';
-                    map[y - 1][x - 1].innerHTML = " ";
-                }, speed);
+                map[y - 1][x - 1].style.backgroundColor = 'white';
+                map[y - 1][x - 1].innerHTML = " ";
+                
 
             }
             else if (map_bin[y - 1][x]) {
@@ -175,10 +176,10 @@ elem.addEventListener('click', function () {
                 direction = "up";
                 map_bin[y][x] = "&uArr;";
 
-                setTimeout(function () {
-                    map[y][x].style.backgroundColor = 'yellow';
-                    map[y][x].innerHTML = "&uArr;";
-                }, speed);
+                
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&uArr;";
+                
 
             }
             else {
@@ -186,11 +187,10 @@ elem.addEventListener('click', function () {
                 direction = "left";
                 map_bin[y][x] = "&lArr;";
 
-                setTimeout(function () {
-                    map[y][x].style.backgroundColor = 'yellow';
-                    map[y][x].innerHTML = "&lArr;";
-                }, speed);
-
+                
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&lArr;";
+                
             }
             break;
         case "down":
@@ -201,13 +201,13 @@ elem.addEventListener('click', function () {
                y++;
                map_bin[y][x] = "&dArr;";
 
-               setTimeout(function () {
-                   map[y][x].style.backgroundColor = 'yellow';
-                   map[y][x].innerHTML = "&dArr;";
+               
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&dArr;";
 
-                   map[y - 1][x].style.backgroundColor = 'white';
-                   map[y - 1][x].innerHTML = " ";
-               }, speed);
+                map[y - 1][x].style.backgroundColor = 'white';
+                map[y - 1][x].innerHTML = " ";
+               
 
            }else if(map_bin[y+1][x-1] && map_bin[y+1][x]){
                map_bin[y][x] = 1;
@@ -219,33 +219,33 @@ elem.addEventListener('click', function () {
                x--;
                map_bin[y][x] = "&lArr;";
 
-               setTimeout(function () {
-                   map[y][x].style.backgroundColor = 'yellow';
-                   map[y][x].innerHTML = "&lArr;";
+               
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&lArr;";
 
-                   map[y - 1][x+1].style.backgroundColor = 'white';
-                   map[y - 1][x+1].innerHTML = " ";
-               }, speed);
+                map[y - 1][x+1].style.backgroundColor = 'white';
+                map[y - 1][x+1].innerHTML = " ";
+               
 
            }else if(!map_bin[y][x-1]){
 
                direction = "right";
                map_bin[y][x] = "&rArr;";
 
-               setTimeout(function () {
-                   map[y][x].style.backgroundColor = 'yellow';
-                   map[y][x].innerHTML = "&rArr;";
-               }, speed);
+               
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&rArr;";
+               
 
            }else{
 
                direction = "up";
                map_bin[y][x] = "&uArr;";
 
-               setTimeout(function () {
-                   map[y][x].style.backgroundColor = 'yellow';
-                   map[y][x].innerHTML = "&uArr;";
-               }, speed);
+               
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&uArr;";
+               
 
            }
            break;
@@ -255,13 +255,12 @@ elem.addEventListener('click', function () {
                map_bin[y][x] = true;
                x--;
                map_bin[y][x] = "&lArr;";
-               setTimeout(function () {
-                   map[y][x].style.backgroundColor = 'yellow';
-                   map[y][x].innerHTML = "&lArr;";
+               
+               map[y][x].style.backgroundColor = 'yellow';
+               map[y][x].innerHTML = "&lArr;";
 
-                   map[y][x+1].style.backgroundColor = 'white';
-                   map[y][x+1].innerHTML = " ";
-               }, speed);
+               map[y][x+1].style.backgroundColor = 'white';
+               map[y][x+1].innerHTML = " ";
 
            }else if(!map_bin[y-1][x] && map_bin[y-1][x-1] && map_bin[y][x-1]){
 
@@ -276,37 +275,34 @@ elem.addEventListener('click', function () {
                y--;
                map_bin[y][x] = "&uArr;";
 
-               setTimeout(function () {
-                   map[y][x].style.backgroundColor = 'yellow';
-                   map[y][x].innerHTML = "&uArr;";
+               map[y][x].style.backgroundColor = 'yellow';
+               map[y][x].innerHTML = "&uArr;";
 
-                   map[y + 1][x+1].style.backgroundColor = 'white';
-                   map[y + 1][x+1].innerHTML = " ";
-               }, speed);
+               map[y + 1][x+1].style.backgroundColor = 'white';
+               map[y + 1][x+1].innerHTML = " ";
 
            }else if(map_bin[y-1][x]){
 
                direction = "up";
                map_bin[y][x] = "&uArr;";
 
-               setTimeout(function () {
-                   map[y][x].style.backgroundColor = 'yellow';
-                   map[y][x].innerHTML = "&uArr;";
-               }, speed);
+               
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&uArr;";
+
 
            }else{
 
                direction = "down";
                map_bin[y][x] = "&dArr;";
 
-               setTimeout(function () {
-                   map[y][x].style.backgroundColor = 'yellow';
-                   map[y][x].innerHTML = "&dArr;";
-               }, speed);
+
+                map[y][x].style.backgroundColor = 'yellow';
+                map[y][x].innerHTML = "&dArr;";
+
 
            }
            break;
     }
     /////////////////////////////////////
-
-});
+}
